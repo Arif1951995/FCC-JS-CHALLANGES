@@ -1,0 +1,62 @@
+function smallestCommons(arr) {
+  arr = arr.sort((a, b) => a - b);
+  let newArr = [];
+
+  for (let i = arr[0]; i <= arr[1]; i++) {
+    newArr.push(i)
+  }
+  let w = window;
+  for (i=0;i<newArr.length;i++)
+       {
+          w["arr_"+i] = [];
+        
+      }
+
+  let newArr2 = [];
+
+  let found = false;
+  let count = 0;
+  let result;
+  
+
+  while (!found) {
+    count++;
+
+    newArr.map((e,i) => {
+
+      w["arr_"+i].push(e * count);
+      let countMath = 0;
+      for (let k = 0; k < newArr.length; k++) {
+        if (w["arr_"+k].includes(e * count)) {
+          countMath++;
+          if (countMath === newArr.length) {
+            found = true;
+            result = e * count
+            break;
+          }
+        }
+      }
+    })
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return result;
+}
+
+console.log(smallestCommons([1, 5]));
