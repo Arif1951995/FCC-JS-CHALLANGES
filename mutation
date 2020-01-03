@@ -1,0 +1,8 @@
+function mutation(arr) {
+  arr.sort((a, b) => b.length - a.length);
+
+  return arr[1].split('').filter(e => arr[0].toLowerCase().includes(e.toLowerCase())).length >= arr[1].length;
+
+}
+
+console.log(mutation(["voodoo", "no"]));
