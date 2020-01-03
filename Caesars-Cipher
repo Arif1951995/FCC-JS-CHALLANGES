@@ -1,0 +1,29 @@
+function rot13(str) { 
+  // LBH QVQ VG!
+  let newStr = ``; 
+  let alph = `abcdefghijklmnopqrstuvwxyz`;
+
+  for(let i = 0; i < str.length; i++) {
+    if(alph.includes(str[i].toLowerCase())) {
+  let alternetiveLetterIndex =  alph.indexOf(str[i].toLowerCase()) + 13;
+     if(alternetiveLetterIndex >= alph.length) {
+      //  console.log(13 - (alph.length - alph.indexOf(str[i].toLowerCase())));
+      alternetiveLetterIndex = 13 - (alph.length - alph.indexOf(str[i].toLowerCase()));
+      //  console.log(alph.indexOf(alph.length) - str[i].toLowerCase());
+      // console.log(alph.length, alph.indexOf(str[i].toLowerCase()))
+     }
+    //  console.log((alph.length - alph.indexOf(str[i].toLowerCase())), 13)
+      newStr += alph[alternetiveLetterIndex].toUpperCase()
+    // console.log(alph[alternetiveLetterIndex]);
+
+    }else {
+     newStr += str[i];
+   }
+  }
+
+
+  return newStr;
+}
+
+// Change the inputs below to test
+console.log(rot13("SERR YBIR?"));    
