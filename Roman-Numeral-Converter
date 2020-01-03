@@ -1,0 +1,25 @@
+function convertToRoman(num) {
+ let romans = ['I','IV','V','IX','X','XL','L','XC','C','CD','D','CM', 'M'];
+  let numbers = [1,4,5,9,10,40,50,90,100,400,500,900, 1000];
+
+  let convertedRoman = '';
+  
+  while(num >= 1) {
+    for(let i = numbers.length - 1; i >= 0; i--) {
+      // console.log(num, numbers[i]);
+      if(num >= numbers[i]) {
+        // console.log(num, numbers[i]);
+              convertedRoman +=  romans[i]
+            //  console.log(num);
+          num = num - numbers[i];
+          break;
+          // console.log(num);
+      }
+    }
+  }
+  
+return convertedRoman
+ 
+}
+
+console.log(convertToRoman(3999));
