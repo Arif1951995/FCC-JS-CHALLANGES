@@ -1,0 +1,16 @@
+function destroyer(arr) {
+  // Remove all the values
+let i  = 1;
+while(arguments[i]) {
+
+   arr = arr.filter(e => e !== arguments[i])
+   
+   
+i++;
+}
+
+  
+  return arr;
+}
+
+console.log(destroyer(["tree", "hamburger", 53], "tree", 53));
