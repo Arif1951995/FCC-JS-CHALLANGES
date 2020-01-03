@@ -1,0 +1,36 @@
+function sumPrimes(num) {
+let primes = [];
+  let isPrime = (num) => {
+    if(num <= 1) {
+      return false
+    }
+    for(let i =2; i < num; i++) {
+    
+     
+      let sum = 0;
+      for(let j =1; sum <= num;  j++) {
+        sum = i * j;
+          if(sum === num) {
+            return false
+          }
+        
+      }
+    }
+    return true 
+  
+  } 
+
+  for(let i = 2; i <= num; i++) {
+    primes.push(i);
+    
+  }
+
+
+
+
+
+
+  return primes.filter(e => isPrime(e)).reduce((acc, val) => acc + val);
+}
+
+console.log(sumPrimes(977));
