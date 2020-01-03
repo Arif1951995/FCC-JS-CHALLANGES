@@ -1,0 +1,8 @@
+function diffArray(arr1, arr2) {
+  var newArr = [];
+  // Same, same; but different.
+  return [...arr1.filter(e => !arr2.includes(e)), ...arr2.filter(e => !arr1.includes(e))];
+}
+
+console.log(diffArray([1, 2, 7, 3, 5], [1, 2, 3, 4,  5]));
+© 2020 GitHub, Inc.
