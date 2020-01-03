@@ -1,0 +1,65 @@
+function steamrollArray(arr) {
+
+  let newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    let count = 0;
+    if (arr[i] instanceof Array) {
+      let stop = false;
+      while (!stop) {
+        console.log(arr[i][count])
+        if (arr[i][count] instanceof Array) {
+
+
+          arr[i][count].map((e, i) => {
+            console.log(e);
+            if (e instanceof Array === false) {
+              newArr.push(e)
+
+              stop = true;
+            } else {
+              e.map(el => {
+                if (el instanceof Array === false) {
+                  newArr.push(el);
+                  stop = true;
+                }
+              })
+            }
+            count++;
+          })
+        } else {
+          // console.log(arr[i][count]);
+
+          if (arr[i][count]) {
+            newArr.push(arr[i][count])
+            console.log(!arr[i][count + 1])
+            if (!arr[i][count + 1]) {
+              stop = true;
+
+            } else {
+              count++;
+            }
+
+
+
+          } else {
+            stop = true;
+          }
+
+
+        }
+
+        if (newArr.length >= 4) {
+          stop = true;
+
+        }
+      }
+
+    } else {
+      newArr.push(arr[i]);
+    }
+  }
+
+  return newArr
+}
+
+console.log(steamrollArray([1, [[2]], {}, [3, [[4]]]]));
