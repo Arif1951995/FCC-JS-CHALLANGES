@@ -1,0 +1,98 @@
+function checkCashRegister(price, cash, cid) {
+  let currency = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.1,
+    "QUARTER": 0.25,
+    "ONE": 1,
+    "FIVE": 5,
+    "TEN": 10,
+    "TWENTY": 20,
+    "ONE HUNDRED": 100
+  };
+
+  let changeAvailable = Number(parseFloat(cid.map(e => e[1]).reduce((acc, val) => acc + val)).toFixed(2));
+  let changeDue = Number(parseFloat(cash - price).toFixed(2));
+  console.log(changeAvailable);
+  console.log(changeDue)
+  if (changeDue > changeAvailable) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] }
+  } else if (changeDue === changeAvailable) {
+    return {
+      status: "CLOSED", change: cid
+
+    }
+  } else {
+    let change = {
+      "PENNY": 0,
+      "NICKEL": 0,
+      "DIME": 0,
+      "QUARTER": 0,
+      "ONE": 0,
+      "FIVE": 0,
+      "TEN": 0,
+      "TWENTY": 0,
+      "ONE HUNDRED": 0
+    }
+    cid.reverse();
+    let stop = false;
+    while (!stop) {
+      let count = 0;
+      for (let i = 0; i < cid.length; i++) {
+        if (changeDue >= currency[cid[i][0]] && cid[i][1] > 0) {
+          change[cid[i][0]] += currency[cid[i][0]];
+          change[cid[i][0]] = Number(parseFloat(change[cid[i][0]]).toFixed(2));
+
+          changeDue -= currency[cid[i][0]];
+          changeDue = Number(parseFloat(changeDue).toFixed(2));
+          cid[i][1] -= currency[cid[i][0]];
+          cid[i][1] = Number(parseFloat(cid[i][1]).toFixed(2));
+          break;
+        } else {
+          count++;
+        }
+
+        if (count === cid.length || changeDue <= 0) {
+          stop = true;
+        }
+
+
+
+      }
+    }
+
+    if (changeDue === 0) {
+      let keys = Object.keys(change);
+      let values = Object.values(change);
+      console.log(keys, values)
+
+      let arr = keys.map((e, i) => {
+        return [e, values[i]]
+      })
+      change = arr.filter(e => e[1] > 0);
+      change.reverse();
+      console.log(change);
+
+      return { status: "OPEN", change: change }
+
+
+    } else {
+      return { status: "INSUFFICIENT_FUNDS", change: [] }
+
+    }
+  }
+
+
+}
+
+
+
+console.log(
+  checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+);
+
+
+
+
+
+
