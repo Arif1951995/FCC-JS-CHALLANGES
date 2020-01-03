@@ -1,0 +1,6 @@
+function reverseString(str) {
+  let arr = str.split('');
+  return arr.map((e,i) => arr[(arr.length - i) - 1]).join('');
+}
+
+console.log(reverseString("hello"));
